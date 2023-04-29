@@ -19,8 +19,11 @@ public class Message {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "userid", nullable = false, unique = true)
-    private int userid;
+    @Column(name = "userid_from")
+    private int userid_from;
+
+    @Column(name = "userid_to")
+    private int userid_to;
 
     @Column(name="type")
     private MessageType type;
