@@ -5,14 +5,23 @@ import com.example.notificationsystem.constant.MessageType;
 public class UserInfoDTO {
     private int userid_from;
     private int userid_to;
+    private int send_to_client_id;
     private String type;
+
+    public void setType(String type) {
+        this.type = type;
+    }
 
     public String getType() {
         return type;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setSend_to_client_id(int send_to_client_id) {
+        this.send_to_client_id = send_to_client_id;
+    }
+
+    public int getSend_to_client_id() {
+        return send_to_client_id;
     }
 
     public int getUserid_from() {

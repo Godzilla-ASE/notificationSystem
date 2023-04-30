@@ -8,6 +8,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Date;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -28,9 +30,10 @@ public class Message {
     @Column(name="type")
     private MessageType type;
 
-    @Column(name="received_message")
-    private String received_message;
+    @Column(name="send_to_client_id")
+    private int send_to_client_id;
 
-    @Column(name="response_message")
-    private ReceivedType response_message;
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "creation_date")
+    private Date creation_date;
 }
