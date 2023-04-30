@@ -28,6 +28,7 @@ public class MessageService {
     private String URL_COMMENT = "http://localhost:9000/comments/internal/";
     private String URL_REPLY = "http://localhost:9000/comments/reply/";
     private String URL_POST = "http://localhost:9000/posts/";
+    private String URL_FOLLOW = "http://localhost:9000/follow";
 
     public Message createMessage(UserInfoDTO userInfoDTO){
         Message message = new Message();
@@ -93,6 +94,8 @@ public class MessageService {
             getMessageDTO.setSend_to_client(restTemplate.postForObject(URL_REPLY + "" + message.getSend_to_client_id(), null, String.class));
         } else if (message.getType()==MessageType.LIKE_POST) {
             getMessageDTO.setSend_to_client(restTemplate.postForObject(URL_POST + "" + message.getSend_to_client_id(), null, String.class));
+        } else if (message.getType()==MessageType.FOLLOW_USER){
+            getMessageDTO.setSend_to_client(restTemplate.postForObject(URL_FOLLOW + "" + message.getSend_to_client_id(), null, String.class));
         }
 
         return getMessageDTO;
