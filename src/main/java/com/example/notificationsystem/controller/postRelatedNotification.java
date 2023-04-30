@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -25,21 +26,26 @@ public class postRelatedNotification {
         this.messageService=messageService;
     }
 
-    @PostMapping("/notification/likePost")
+    @PostMapping("/notification")
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
     public void createMessage(@RequestBody UserInfoDTO userInfoDTO) {
         Message message = messageService.createMessage(userInfoDTO);
-        GetMessageDTO getMessageDTO = new GetMessageDTO();
 
-        simpMessagingTemplate.convertAndSend("/topic/post/"+userInfoDTO.getUserid_to(), message.getType());
+        simpMessagingTemplate.convertAndSend("/topic/post/"+userInfoDTO.getUserid_to(), messageService.convertMessageToGet(message, userInfoDTO));
     }
 
     @GetMapping("/notification/{userid}")
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
     public ResponseEntity<List<GetMessageDTO>> getMessages(@PathVariable int userid){
-        List<>
+        List<Message> messageList = messageService.getMessages(userid);
+        List<GetMessageDTO> result = new ArrayList<>();
 
+        for(Message m: messageList){
+            result.add(messageService.convertMessageToGet(m));
+        }
+
+        return ResponseEntity.ok(result);
     }
 }
