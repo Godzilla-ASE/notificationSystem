@@ -17,11 +17,10 @@ import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerCo
 public class WebSocketConfig implements WebSocketMessageBrokerConfigurer{
 
     private static final String ORIGIN_LOCALHOST = "http://localhost:3000";
-    private static final String ORIGIN_PROD = "https://sopra-fs23-group-19-client.oa.r.appspot.com";
 
     @Override
     public void configureMessageBroker(MessageBrokerRegistry config) {
-        config.enableSimpleBroker("/topic");
+        config.enableSimpleBroker("");
     }
 
     @Override

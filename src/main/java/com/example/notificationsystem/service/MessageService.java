@@ -92,17 +92,17 @@ public class MessageService {
         getMessageDTO.setUsername_from(getUserInfo(message.getUserid_from()).getUsername());
         getMessageDTO.setUsername_to(getUserInfo(message.getUserid()).getUsername());
 
-        // getMessageDTO.setSend_to_client(userInfoDTO.getSend_to_client());
+        getMessageDTO.setSend_to_client("666");
 
-        if(message.getType()==MessageType.COMMENT){
-            getMessageDTO.setSend_to_client(restTemplate.postForObject(URL_COMMENT + "" + message.getSend_to_client_id(), null, String.class));
-        }else if(message.getType()==MessageType.REPLY){
-            getMessageDTO.setSend_to_client(restTemplate.postForObject(URL_REPLY + "" + message.getSend_to_client_id(), null, String.class));
-        } else if (message.getType()==MessageType.LIKE_POST) {
-            getMessageDTO.setSend_to_client(restTemplate.postForObject(URL_POST + "" + message.getSend_to_client_id(), null, String.class));
-        } else if (message.getType()==MessageType.FOLLOW_USER){
-            getMessageDTO.setSend_to_client(restTemplate.postForObject(URL_FOLLOW + "" + message.getSend_to_client_id(), null, String.class));
-        }
+//        if(message.getType()==MessageType.COMMENT){
+//            getMessageDTO.setSend_to_client(restTemplate.postForObject(URL_COMMENT + "" + message.getSend_to_client_id(), null, String.class));
+//        }else if(message.getType()==MessageType.REPLY){
+//            getMessageDTO.setSend_to_client(restTemplate.postForObject(URL_REPLY + "" + message.getSend_to_client_id(), null, String.class));
+//        } else if (message.getType()==MessageType.LIKE_POST) {
+//            getMessageDTO.setSend_to_client(restTemplate.postForObject(URL_POST + "" + message.getSend_to_client_id(), null, String.class));
+//        } else if (message.getType()==MessageType.FOLLOW_USER){
+//            getMessageDTO.setSend_to_client(restTemplate.postForObject(URL_FOLLOW + "" + message.getSend_to_client_id(), null, String.class));
+//        }
 
         return getMessageDTO;
 

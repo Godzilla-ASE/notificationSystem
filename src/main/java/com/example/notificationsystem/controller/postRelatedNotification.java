@@ -35,7 +35,16 @@ public class postRelatedNotification {
         System.out.println(userInfoDTO.getUserid_to());
         Message message = messageService.createMessage(userInfoDTO);
 
-        simpMessagingTemplate.convertAndSend("/topic/post/"+userInfoDTO.getUserid_to(), messageService.convertMessageToGet(message, userInfoDTO));
+        if(userInfoDTO.getUserid_to()!=userInfoDTO.getUserid_from()){
+            simpMessagingTemplate.convertAndSend("/topic/post/"+userInfoDTO.getUserid_to(), messageService.convertMessageToGet(message, userInfoDTO));
+            System.out.println("send success"+message.getUserid());
+        }else{
+            GetMessageDTO getMessageDTO = new GetMessageDTO();
+            simpMessagingTemplate.convertAndSend("/topic/post/"+userInfoDTO.getUserid_to(),getMessageDTO);
+
+        }
+
+
     }
 
     @GetMapping("/{userid}")
