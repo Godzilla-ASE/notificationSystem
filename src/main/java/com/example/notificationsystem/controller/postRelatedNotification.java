@@ -32,7 +32,7 @@ public class postRelatedNotification {
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
     public void createMessage(@RequestBody UserInfoDTO userInfoDTO) {
-        System.out.println(userInfoDTO.getSend_to_client());
+        System.out.println(userInfoDTO.getUserid_to());
         Message message = messageService.createMessage(userInfoDTO);
 
         simpMessagingTemplate.convertAndSend("/topic/post/"+userInfoDTO.getUserid_to(), messageService.convertMessageToGet(message, userInfoDTO));

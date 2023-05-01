@@ -32,7 +32,7 @@ public class Message {
     @Column(name = "userid_from")
     private int userid_from;
 
-    @Column(name = "userid_to")
+    @Column(name = "userid")
     private int userid;
 
     @Column(name="type")

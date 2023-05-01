@@ -38,6 +38,8 @@ public class MessageService {
         Message message = new Message();
 
         message.setUserid_from(userInfoDTO.getUserid_from());
+
+        // System.out.println("in service"+userInfoDTO.getUserid_to());
         message.setUserid(userInfoDTO.getUserid_to());
         message.setType(MessageType.valueOf(userInfoDTO.getType()));
         message.setCreation_date(new Date());
