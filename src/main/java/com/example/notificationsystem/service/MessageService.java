@@ -20,8 +20,12 @@ import java.util.List;
 @Service
 @Transactional
 public class MessageService {
-    @Autowired
+
     MessageRepository messageRepository;
+
+    public MessageService(MessageRepository messageRepository){
+        this.messageRepository=messageRepository;
+    }
 
     private RestTemplate restTemplate = new RestTemplate();
 
@@ -34,7 +38,7 @@ public class MessageService {
         Message message = new Message();
 
         message.setUserid_from(userInfoDTO.getUserid_from());
-        message.setUserid_to(userInfoDTO.getUserid_to());
+        message.setUserid(userInfoDTO.getUserid_to());
         message.setType(MessageType.valueOf(userInfoDTO.getType()));
         message.setCreation_date(new Date());
         message.setSend_to_client_id(userInfoDTO.getSend_to_client_id());
@@ -49,13 +53,13 @@ public class MessageService {
         getMessageDTO.setSend_to_client_id(message.getSend_to_client_id());
         getMessageDTO.setType(message.getType());
         getMessageDTO.setUserid_from(message.getUserid_from());
-        getMessageDTO.setUserid_to(message.getUserid_to());
+        getMessageDTO.setUserid_to(message.getUserid());
         getMessageDTO.setCreation_date(message.getCreation_date());
 
         getMessageDTO.setUserAvatar_from(getUserInfo(message.getUserid_from()).getAvatarUrl());
-        getMessageDTO.setUserAvatar_to(getUserInfo(message.getUserid_to()).getAvatarUrl());
+        getMessageDTO.setUserAvatar_to(getUserInfo(message.getUserid()).getAvatarUrl());
         getMessageDTO.setUsername_from(getUserInfo(message.getUserid_from()).getUsername());
-        getMessageDTO.setUsername_to(getUserInfo(message.getUserid_to()).getUsername());
+        getMessageDTO.setUsername_to(getUserInfo(message.getUserid()).getUsername());
 
         getMessageDTO.setSend_to_client(userInfoDTO.getSend_to_client());
 
@@ -78,13 +82,13 @@ public class MessageService {
         getMessageDTO.setSend_to_client_id(message.getSend_to_client_id());
         getMessageDTO.setType(message.getType());
         getMessageDTO.setUserid_from(message.getUserid_from());
-        getMessageDTO.setUserid_to(message.getUserid_to());
+        getMessageDTO.setUserid_to(message.getUserid());
         getMessageDTO.setCreation_date(message.getCreation_date());
 
         getMessageDTO.setUserAvatar_from(getUserInfo(message.getUserid_from()).getAvatarUrl());
-        getMessageDTO.setUserAvatar_to(getUserInfo(message.getUserid_to()).getAvatarUrl());
+        getMessageDTO.setUserAvatar_to(getUserInfo(message.getUserid()).getAvatarUrl());
         getMessageDTO.setUsername_from(getUserInfo(message.getUserid_from()).getUsername());
-        getMessageDTO.setUsername_to(getUserInfo(message.getUserid_to()).getUsername());
+        getMessageDTO.setUsername_to(getUserInfo(message.getUserid()).getUsername());
 
         // getMessageDTO.setSend_to_client(userInfoDTO.getSend_to_client());
 
@@ -113,8 +117,8 @@ public class MessageService {
     }
 
     public List<Message> getMessages(int userid){
-        if(messageRepository.findByUserid_to(userid)!=null){
-            return messageRepository.findByUserid_to(userid);
+        if(messageRepository.findByUserid(userid)!=null){
+            return messageRepository.findByUserid(userid);
         }else {
             throw new ResponseStatusException(HttpStatus.NO_CONTENT, "No Messages");
         }

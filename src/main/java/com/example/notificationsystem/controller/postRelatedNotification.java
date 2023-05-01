@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@CrossOrigin("*")
 @RestController
+@RequestMapping("/notification")
 public class postRelatedNotification {
     @Autowired
     SimpMessagingTemplate simpMessagingTemplate;
@@ -26,16 +28,17 @@ public class postRelatedNotification {
         this.messageService=messageService;
     }
 
-    @PostMapping("/notification")
+    @PostMapping
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
     public void createMessage(@RequestBody UserInfoDTO userInfoDTO) {
+        System.out.println(userInfoDTO.getSend_to_client());
         Message message = messageService.createMessage(userInfoDTO);
 
         simpMessagingTemplate.convertAndSend("/topic/post/"+userInfoDTO.getUserid_to(), messageService.convertMessageToGet(message, userInfoDTO));
     }
 
-    @GetMapping("/notification/{userid}")
+    @GetMapping("/{userid}")
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
     public ResponseEntity<List<GetMessageDTO>> getMessages(@PathVariable int userid){

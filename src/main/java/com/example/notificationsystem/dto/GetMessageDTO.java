@@ -1,7 +1,7 @@
 package com.example.notificationsystem.dto;
 
 import com.example.notificationsystem.constant.MessageType;
-import jakarta.persistence.Column;
+// import jakarta.persistence.Column;
 
 import java.util.Date;
 
