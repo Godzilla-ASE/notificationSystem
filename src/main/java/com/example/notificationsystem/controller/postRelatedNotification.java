@@ -43,8 +43,6 @@ public class postRelatedNotification {
             simpMessagingTemplate.convertAndSend("/topic/post/"+userInfoDTO.getUserid_to(),getMessageDTO);
 
         }
-
-
     }
 
     @GetMapping("/{userid}")

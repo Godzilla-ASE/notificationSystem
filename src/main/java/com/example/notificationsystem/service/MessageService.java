@@ -109,13 +109,13 @@ public class MessageService {
     }
 
     public GetUserDTO getUserInfo(int id){
-//        GetUserDTO getUserDTO = template.postForObject(URL + "" + id, null, GetUserDTO.class);
-//        return getUserDTO;
-        GetUserDTO getUserDTO = new GetUserDTO();
-        getUserDTO.setAvatarUrl("image");
-        getUserDTO.setUsername("user1");
-
+        GetUserDTO getUserDTO = restTemplate.getForObject("http://172.20.10.4:8080/users/" + id, GetUserDTO.class);
         return getUserDTO;
+//        GetUserDTO getUserDTO = new GetUserDTO();
+//        getUserDTO.setAvatarUrl("image");
+//        getUserDTO.setUsername("user1");
+//
+//        return getUserDTO;
     }
 
     public List<Message> getMessages(int userid){
