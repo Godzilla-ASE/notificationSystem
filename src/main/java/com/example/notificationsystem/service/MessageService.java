@@ -3,6 +3,7 @@ package com.example.notificationsystem.service;
 import com.example.notificationsystem.constant.MessageType;
 import com.example.notificationsystem.constant.ReceivedType;
 import com.example.notificationsystem.dto.GetMessageDTO;
+import com.example.notificationsystem.dto.GetPostDTO;
 import com.example.notificationsystem.dto.GetUserDTO;
 import com.example.notificationsystem.dto.UserInfoDTO;
 import com.example.notificationsystem.entity.Message;
@@ -92,17 +93,18 @@ public class MessageService {
         getMessageDTO.setUsername_from(getUserInfo(message.getUserid_from()).getUsername());
         getMessageDTO.setUsername_to(getUserInfo(message.getUserid()).getUsername());
 
-        getMessageDTO.setSend_to_client("666");
+//        getMessageDTO.setSend_to_client("666");
 
-//        if(message.getType()==MessageType.COMMENT){
-//            getMessageDTO.setSend_to_client(restTemplate.postForObject(URL_COMMENT + "" + message.getSend_to_client_id(), null, String.class));
-//        }else if(message.getType()==MessageType.REPLY){
-//            getMessageDTO.setSend_to_client(restTemplate.postForObject(URL_REPLY + "" + message.getSend_to_client_id(), null, String.class));
-//        } else if (message.getType()==MessageType.LIKE_POST) {
-//            getMessageDTO.setSend_to_client(restTemplate.postForObject(URL_POST + "" + message.getSend_to_client_id(), null, String.class));
-//        } else if (message.getType()==MessageType.FOLLOW_USER){
-//            getMessageDTO.setSend_to_client(restTemplate.postForObject(URL_FOLLOW + "" + message.getSend_to_client_id(), null, String.class));
-//        }
+        if(message.getType()==MessageType.COMMENT){
+            getMessageDTO.setSend_to_client(restTemplate.getForObject("http://localhost:9000/comments/internal/" + message.getSend_to_client_id(), String.class));
+        }else if(message.getType()==MessageType.REPLY){
+            getMessageDTO.setSend_to_client(restTemplate.getForObject("http://localhost:9000/comments/reply/" + message.getSend_to_client_id(), String.class));
+        } else if (message.getType()==MessageType.LIKE_POST) {
+            GetPostDTO getPostDTO = restTemplate.getForObject("http://localhost:9000/posts/" + message.getSend_to_client_id(), GetPostDTO.class);
+            getMessageDTO.setSend_to_client(getPostDTO.getContent_text());
+        } else if (message.getType()==MessageType.FOLLOW_USER){
+            getMessageDTO.setSend_to_client(restTemplate.postForObject(URL_FOLLOW + "" + message.getSend_to_client_id(), null, String.class));
+        }
 
         return getMessageDTO;
 
