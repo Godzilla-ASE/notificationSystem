@@ -30,10 +30,6 @@ public class MessageService {
 
     private RestTemplate restTemplate = new RestTemplate();
 
-    private String URL_COMMENT = "http://localhost:9000/comments/internal/";
-    private String URL_REPLY = "http://localhost:9000/comments/reply/";
-    private String URL_POST = "http://localhost:9000/posts/";
-    private String URL_FOLLOW = "http://localhost:9000/follow";
 
     public Message createMessage(UserInfoDTO userInfoDTO){
         Message message = new Message();
@@ -97,14 +93,12 @@ public class MessageService {
 //        getMessageDTO.setSend_to_client("666");
 
         if(message.getType()==MessageType.COMMENT){
-            getMessageDTO.setSend_to_client(restTemplate.getForObject("http://localhost:9000/comments/internal/" + message.getSend_to_client_id(), String.class));
+            getMessageDTO.setSend_to_client(restTemplate.getForObject("http://post:8082/comments/internal/" + message.getSend_to_client_id(), String.class));
         }else if(message.getType()==MessageType.REPLY){
-            getMessageDTO.setSend_to_client(restTemplate.getForObject("http://localhost:9000/comments/reply/" + message.getSend_to_client_id(), String.class));
+            getMessageDTO.setSend_to_client(restTemplate.getForObject("http://post:8082/comments/reply/" + message.getSend_to_client_id(), String.class));
         } else if (message.getType()==MessageType.LIKE_POST) {
-            GetPostDTO getPostDTO = restTemplate.getForObject("http://localhost:9000/posts/" + message.getSend_to_client_id(), GetPostDTO.class);
+            GetPostDTO getPostDTO = restTemplate.getForObject("http://post:8082/posts/" + message.getSend_to_client_id(), GetPostDTO.class);
             getMessageDTO.setSend_to_client(getPostDTO.getContent_text());
-        } else if (message.getType()==MessageType.FOLLOW_USER){
-            getMessageDTO.setSend_to_client(restTemplate.postForObject(URL_FOLLOW + "" + message.getSend_to_client_id(), null, String.class));
         }
 
         return getMessageDTO;
@@ -112,7 +106,7 @@ public class MessageService {
     }
 
     public GetUserDTO getUserInfo(int id){
-        GetUserDTO getUserDTO = restTemplate.getForObject("http://10.21.10.228:8080/users/" + id, GetUserDTO.class);
+        GetUserDTO getUserDTO = restTemplate.getForObject("http://user:8080/users/" + id, GetUserDTO.class);
         return getUserDTO;
 //        GetUserDTO getUserDTO = new GetUserDTO();
 //        getUserDTO.setAvatarUrl("image");
