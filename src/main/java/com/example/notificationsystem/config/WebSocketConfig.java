@@ -16,7 +16,7 @@ import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerCo
 @EnableWebSocketMessageBroker
 public class WebSocketConfig implements WebSocketMessageBrokerConfigurer{
 
-    private static final String ORIGIN_LOCALHOST = "http://localhost:3000";
+    private static final String ORIGIN_LOCALHOST = "http://10.21.6.16:3000";
 
     @Override
     public void configureMessageBroker(MessageBrokerRegistry config) {

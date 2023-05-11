@@ -45,6 +45,13 @@ public class postRelatedNotification {
         }
     }
 
+    @PostMapping("/delete")
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    public void deleteMessage(@RequestBody UserInfoDTO userInfoDTO) {
+        messageService.deleteMessage(userInfoDTO);
+    }
+
     @GetMapping("/{userid}")
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody

@@ -46,6 +46,7 @@ public class MessageService {
         message.setCreation_date(new Date());
         message.setSend_to_client_id(userInfoDTO.getSend_to_client_id());
 
+        System.out.println(message.getType());
         return messageRepository.save(message);
     }
 
@@ -111,7 +112,7 @@ public class MessageService {
     }
 
     public GetUserDTO getUserInfo(int id){
-        GetUserDTO getUserDTO = restTemplate.getForObject("http://172.20.10.4:8080/users/" + id, GetUserDTO.class);
+        GetUserDTO getUserDTO = restTemplate.getForObject("http://10.21.10.228:8080/users/" + id, GetUserDTO.class);
         return getUserDTO;
 //        GetUserDTO getUserDTO = new GetUserDTO();
 //        getUserDTO.setAvatarUrl("image");
@@ -125,6 +126,19 @@ public class MessageService {
             return messageRepository.findByUserid(userid);
         }else {
             throw new ResponseStatusException(HttpStatus.NO_CONTENT, "No Messages");
+        }
+    }
+
+    public void deleteMessage(UserInfoDTO userInfoDTO){
+        List<Message> messageList = messageRepository.findAll();
+
+        for(Message m:messageList){
+            if(m.getUserid() == userInfoDTO.getUserid_to()
+                    && m.getUserid_from() == userInfoDTO.getUserid_from()
+                    && m.getType() == MessageType.valueOf(userInfoDTO.getType())
+                    && m.getSend_to_client_id() == userInfoDTO.getSend_to_client_id()){
+                messageRepository.delete(m);
+            }
         }
     }
 }
