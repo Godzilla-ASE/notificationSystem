@@ -42,7 +42,6 @@ public class MessageService {
         message.setCreation_date(new Date());
         message.setSend_to_client_id(userInfoDTO.getSend_to_client_id());
 
-        System.out.println(message.getType());
         return messageRepository.save(message);
     }
 
