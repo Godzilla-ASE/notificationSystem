@@ -1,7 +1,7 @@
 package com.example.notificationsystem.entity;
 
 import com.example.notificationsystem.constant.MessageType;
-import jakarta.persistence.*;
+//import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
