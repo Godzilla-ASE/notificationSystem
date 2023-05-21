@@ -1,24 +1,19 @@
 package com.example.notificationsystem.controller;
 
-import com.example.notificationsystem.constant.MessageType;
-import com.example.notificationsystem.constant.ReceivedType;
-import com.example.notificationsystem.dto.GetMessageDTO;
 import com.example.notificationsystem.dto.UserInfoDTO;
 import com.example.notificationsystem.entity.Message;
-import com.example.notificationsystem.repository.MessageRepository;
 import com.example.notificationsystem.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.*;
 @RestController
-public class userRelatedNotification {
+public class UserRelatedNotification {
     @Autowired
     SimpMessagingTemplate simpMessagingTemplate;
     private MessageService messageService;
 
-    public userRelatedNotification(MessageService messageService){
+    public UserRelatedNotification(MessageService messageService){
         this.messageService=messageService;
     }
 

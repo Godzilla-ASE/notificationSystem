@@ -98,7 +98,7 @@ public class MessageService {
             getMessageDTO.setSend_to_client(restTemplate.getForObject("http://post:8082/comments/reply/" + message.getSend_to_client_id(), String.class));
         } else if (message.getType()==MessageType.LIKE_POST) {
             GetPostDTO getPostDTO = restTemplate.getForObject("http://post:8082/posts/" + message.getSend_to_client_id(), GetPostDTO.class);
-            getMessageDTO.setSend_to_client(getPostDTO.getContent_text());
+            getMessageDTO.setSend_to_client(getPostDTO.getTitle());
         }
 
         return getMessageDTO;
