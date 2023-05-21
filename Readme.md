@@ -53,6 +53,9 @@ More details can be found in https://docs.google.com/spreadsheets/d/1nK-1bhyr9BW
 Notification service depends on user service, and mysql service.
 
 ## Testing and continuous integration
+1. Testing
+
+
 
 ## Author
 
