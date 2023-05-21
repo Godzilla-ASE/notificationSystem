@@ -55,7 +55,7 @@ Notification service depends on user service, and mysql service.
 ## Testing and continuous integration
 1. Testing
 
-
+We use unit testing to test methods
 
 ## Author
 
