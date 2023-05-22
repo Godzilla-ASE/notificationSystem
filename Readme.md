@@ -6,6 +6,18 @@ Functions include:
 - Delete messages
 - Get messages through user id
 
+## Framework
+
+Notification service uses `Java Springboot` framework and `MYSQL` database. Structure of files follows the specification of Springboot project:
+
+- `controller`: Define endpoints
+- `dto`: Define structures received from frontend
+- `entity`: Define fields used in MYSQL database
+- `config`: Configuration files of websocket
+- `constant`: Define the constants (enum) used in the service
+-  `repository`: Used to manipulate database
+- `service`: Main logic of this microservice
+
 ## Prerequisites
 
 - Java Development Kit (JDK) 8 or higher
@@ -36,6 +48,8 @@ Functions include:
 ```bash
 docker run hanyang11/asenotifyimg:v1.0
 ```
+Please note that because of services dependency, there may be connection issues happened if you only run this single service.
+
 
 2. The service will be accessible at `http://localhost:8083`.
 
@@ -50,9 +64,8 @@ docker run hanyang11/asenotifyimg:v1.0
 More details can be found in `API_documentation.xlsx` 
 
 2. The Message Service provides the following websocket endpoints: <br>
- 
-    Connection Endpoint: `/ase-websocket`
-    Subscription Endpoint: `/topic/{userid}`
+- Connection Endpoint: `/ase-websocket`
+- Subscription Endpoint: `/topic/{userid}`
 
 ## Services Dependency
 
@@ -66,6 +79,9 @@ Notification service depends on user service, and mysql service.
 
 2. Continuous integration
 - Sonarcube
+
+Please see more details in the `Readme.md` of the whole application.
+
 
 ## Author
 
